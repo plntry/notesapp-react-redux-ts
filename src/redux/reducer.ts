@@ -48,6 +48,7 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
                     id: Date.now(),
                     date: new Date()
                 }
+                
                 return {
                     ...state,
                     notesList: [newNote, ...state.notesList],

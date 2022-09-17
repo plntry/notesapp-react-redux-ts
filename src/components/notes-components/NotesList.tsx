@@ -6,7 +6,7 @@ const NotesList: React.FC = () => {
   const { notesList, searchText } = useSelector((state: AppState) => state);
 
   return (
-    <div className="">
+    <div className='notes-container'>
       {notesList
         .filter((note) =>
           searchText

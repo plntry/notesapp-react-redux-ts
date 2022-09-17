@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setNotePreviewId } from "../../redux/actions/noteFieldsActions";
 
 const Note: React.FC<INote> = ({ content, title, date, id }) => {
-  const data = new Date(date);
   const notePreviewId = useSelector((state: AppState) => state.notePreviewId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,37 +13,33 @@ const Note: React.FC<INote> = ({ content, title, date, id }) => {
     dispatch(setNotePreviewId(id));
   };
 
-  const configuratedDate = data
+  const configuratedDate = new Date(date)
     .toLocaleDateString("en", {
-        weekday: "short",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      })
-    .split(",");
-
-  const time = configuratedDate[2];
-  const month = configuratedDate[1];
+      timeZone:"UTC",
+      month:"long",
+      day:"2-digit",
+      year:"numeric"
+    }) 
 
   const slicedNoteText =
   content.length > 40 ? content.slice(0, 40).concat("...") : content;
 
-  let noteStyles = "list-group-item";
+  let styledNote = "note-item";
 
   if (notePreviewId === id) {
-    noteStyles += " active";
+    styledNote += " note-active";
   }
 
   return (
-    <div className={noteStyles} onClick={handleNoteClick}>
-      <div className="">
-        <h5 className="">{title}</h5>
-        <small>{time}</small>
+    <div className={styledNote} onClick={handleNoteClick}>
+      <div className="flex-container">
+        <div>{configuratedDate}</div>
+        <div className="note-category">Task</div>
       </div>
-      <p className="">{slicedNoteText}</p>
-      <small>{month}</small>
+      
+      <div className="">{title}</div>
+      <div className="">{slicedNoteText}</div>
+      <small>{configuratedDate}</small>
     </div>
   );
 };
