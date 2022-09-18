@@ -3,6 +3,7 @@ type AppState = {
   noteFields: {
     title: string;
     content: string;
+    category: string;
   };
   notePreviewId: null | number;
   searchText: string;
@@ -19,5 +20,5 @@ type Note = {
   title: string;
   date: Date;
   content: string;
-
+  category: string;
 }

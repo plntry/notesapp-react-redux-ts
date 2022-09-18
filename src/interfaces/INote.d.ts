@@ -3,5 +3,5 @@ interface INote {
     title: string;
     date: Date;
     content: string;
-    
+    category: string;
   }

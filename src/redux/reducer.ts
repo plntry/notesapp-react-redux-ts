@@ -3,6 +3,7 @@ const initialState: AppState = {
     noteFields: {
         title: '',
         content: '',
+        category: '',
     },
     notePreviewId: null,
      searchText: '',
@@ -23,7 +24,7 @@ function updateNoteFields(
     }
 }
 
-const resetNoteFields = () => ({ title: '', content: '' });
+const resetNoteFields = () => ({ title: '', content: '', category: 'Task' });
 
 export const reducer = (state:AppState = initialState, action:Action): AppState => {
     switch(action.type) {
@@ -33,8 +34,11 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
         case 'SET_NEW_NOTE_TEXT':
             return updateNoteFields(state, action.payload, 'content');
 
+        case 'SET_NEW_NOTE_CATEGORY':
+            return updateNoteFields(state, action.payload, 'category');
+
         case 'ADD_NEW_NOTE':
-            const { title, content } = action.payload;
+            const { title, content, category } = action.payload;
 
             if (state.isEdit) {
                 return {
@@ -45,6 +49,7 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
                 const newNote: Note = {
                     title,
                     content,
+                    category,
                     id: Date.now(),
                     date: new Date()
                 }
@@ -80,7 +85,8 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
             const updatedNote = {
                 ...note,
                 title: action.payload.title,
-                noteText: action.payload.noteText,
+                content: action.payload.content,
+                category: action.payload.category,
                 date: new Date(),
             };
             const noteIndex = state.notesList.findIndex(

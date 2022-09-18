@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { updateNote, addNewNote, setEditStatus } from '../../redux/actions/noteListActions';
-import { setNewNoteContent, setNewNoteTitle } from '../../redux/actions/noteFieldsActions';
+import { setNewNoteContent, setNewNoteTitle, setNewNoteCategory } from '../../redux/actions/noteFieldsActions';
 
 export const CreateNewNote: React.FC = () => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export const CreateNewNote: React.FC = () => {
 
     const notesList = useSelector((state: AppState) => state.notesList);
 
-    const { title, content } = useSelector((state: AppState) => state.noteFields)
+    const { title, content, category } = useSelector((state: AppState) => state.noteFields)
 
     const isEdit = useSelector((state: AppState) => state.isEdit);
 
@@ -26,10 +26,11 @@ export const CreateNewNote: React.FC = () => {
             ...note,
             title,
             content,
+            category,
           };
           dispatch(updateNote(updatedNote));
         } else {
-          dispatch(addNewNote({ title, content }));
+          dispatch(addNewNote({ title, content, category }));
         }
         navigate("/");
     }
@@ -37,28 +38,30 @@ export const CreateNewNote: React.FC = () => {
     const handleFormCancel = () => {
         dispatch(setNewNoteContent(''));
         dispatch(setNewNoteTitle(''));
+        dispatch(setNewNoteCategory('Task'));
         dispatch(setEditStatus(false));
     }
 
     return (
+      <div className='open-form-btn-container'>
         <form
-          className=""
-          onSubmit={(event) => handleFormSubmit(event)}
+        className="create-note-form"
+        onSubmit={(event) => handleFormSubmit(event)}
         >
-
-        <input
-          type="text"
-          className=""
-          placeholder="Enter note's name here"
-          value={title}
-          onChange={(e) => dispatch(setNewNoteTitle(e.target.value))}
-          required
-          minLength={3}
-        />
-
-        <div className="">
+          <label>Note's name:</label>
+          <input
+            type="text"
+            name='title'
+            className="create-note-form-elements"
+            placeholder="Enter note's name here"
+            value={title}
+            onChange={(e) => dispatch(setNewNoteTitle(e.target.value))}
+            required
+            minLength={3}
+          />
+          <label>Note's content:</label>
           <textarea
-            className=""
+            className="create-note-form-elements"
             id="noteTextarea"
             rows={4}
             value={content}
@@ -66,21 +69,29 @@ export const CreateNewNote: React.FC = () => {
             placeholder="Enter content here"
             required
           />
-        </div>
-
-        <div className="">
-          <button className="" type="submit">
+          <label>Note's category:</label>
+          <select
+            className='create-note-form-elements'
+            value={category}
+            onChange={(e) => dispatch(setNewNoteCategory(e.target.value))}
+            required
+          >
+            <option defaultValue='Task'>Task</option>
+            <option value="Random Thought">Random Thought</option>
+            <option value="Idea">Idea</option>
+          </select>
+          <button className="edit-note-btn" type="submit">
             Submit
           </button>
           <Link
             to="/"
-            className=""
+            className="delete-note-btn"
             onClick={handleFormCancel}
           >
             Cancel
           </Link>
-        </div>
-      </form>
+        </form>
+      </div>
     )
 }
 

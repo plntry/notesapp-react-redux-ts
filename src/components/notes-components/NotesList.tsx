@@ -20,6 +20,7 @@ const NotesList: React.FC = () => {
             date={note.date}
             content={note.content}
             title={note.title}
+            category={note.category}
           />
         ))}
     </div>

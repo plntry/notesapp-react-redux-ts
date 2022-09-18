@@ -11,6 +11,11 @@ body {
   align-items: center;
 }
 
+::selection {
+  color: white;
+  background-color: rgb(75, 163, 163);
+}
+
 .flex-container {
   display: flex;
 }
@@ -36,7 +41,6 @@ body {
 .open-form-btn:hover {
   background-color: #24509c;
   color: white;
-  transform: translateY(2px);
 }
 
 .notes-message {
@@ -56,24 +60,24 @@ body {
   display: flex;
   flex-flow: column wrap;
   gap: 5px;
-  margin: 25px;
-  left: 0;
-  /* position:fixed; */
-  /* justify-content: flex-start; */
+  margin: 15px;
+  margin-left: 15px;
+  margin-right: 40vw;
 }
 
 .note-item {
   background-color: rgb(231, 244, 244);
-  border-radius: 5px;
-  border: 2px solid rgb(212, 211, 211);
+  border: 2px solid rgb(171, 170, 170);
   width: 250px;
   height: 150px;
-  transition: 0.3s;
+  transition: transform .2s;
+  padding: 3px;
 }
 
 .note-item:hover {
   cursor: pointer;
   background-color: rgb(156, 216, 216);
+  transform: scale(1.1);
 }
 
 .note-category {
@@ -84,7 +88,40 @@ body {
   color: white;
   padding: 5px;
   border-radius: 5px;
-  margin: 4px 3px 3px 65px;
+  margin-left: auto;
+  text-align: center;
+}
+
+.note-date {
+  font-style: oblique;
+}
+
+.note-title {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.note-content {
+  margin-top: 5px;
+}
+
+.note-dates {
+  margin-top: 10px;
+  background-color: rgb(184, 80, 80);
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.note-idea {
+  background-color: #24509c;
+}
+
+.note-random-thought {
+  background-color: #cd8c2a;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .note-active {
@@ -93,13 +130,77 @@ body {
 }
 
 .preview-note-item {
+  position: fixed;
   display: flex;
   flex-direction: column;
+  padding: 3px;
   margin-top: 25px;
-  width: calc(35vw);
-  background-color: rgb(250, 248, 226);
-  border: 2px solid rgb(208, 220, 220);
-  border-radius: 5px;
-  height: 40vh;
+  margin-left: 60vw;
+  width: 35vw;
+  background-color: rgb(218, 248, 248);
+  border: 2px solid rgb(116, 156, 156);
+  height: auto;
   margin-right: 20px;
+}
+
+.preview-point {
+  font-weight: 500;
+  font-size: 17px;
+  background-color: rgb(156, 216, 216);
+}
+
+.delete-note-btn {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 9px;
+  background-color: rgb(187, 16, 16);
+  color: white;
+  padding: 4px 6px;
+  border: 2px solid rgb(107, 31, 31);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 3px;
+}
+
+.delete-note-btn:hover {
+  background-color: #9c2424;
+  color: white;
+}
+
+.edit-note-btn {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 9px;
+  background-color: rgb(17, 153, 203);
+  color: white;
+  padding: 4px 6px;
+  border: 2px solid rgb(29, 95, 117);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 3px;
+}
+
+.edit-note-btn:hover {
+  background-color: rgb(21, 119, 154);
+  color: white;
+}
+
+/* Create Note Form */
+.create-note-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(218, 248, 248);
+  border: 2px solid rgb(116, 156, 156);
+  margin-top: 150px;
+  padding: 60px;
+}
+
+.create-note-form-elements {
+  margin-bottom: 25px;
 }

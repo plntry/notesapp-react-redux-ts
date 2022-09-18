@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNotePreviewId } from "../../redux/actions/noteFieldsActions";
+import { regexp } from "../../constants/constants";
 
-const Note: React.FC<INote> = ({ content, title, date, id }) => {
+const Note: React.FC<INote> = ({ content, title, category, date, id }) => {
   const notePreviewId = useSelector((state: AppState) => state.notePreviewId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,27 +20,37 @@ const Note: React.FC<INote> = ({ content, title, date, id }) => {
       month:"long",
       day:"2-digit",
       year:"numeric"
-    }) 
+    })
 
-  const slicedNoteText =
+  let dateMatch = Array.from(content.matchAll(regexp)).join(', ');
+
+  const slicedContent =
   content.length > 40 ? content.slice(0, 40).concat("...") : content;
 
-  let styledNote = "note-item";
+  let previewNoteStyle = 'note-item';
 
   if (notePreviewId === id) {
-    styledNote += " note-active";
+    previewNoteStyle += ' note-active';
+  }
+
+  let categoryStyle = 'note-category';
+
+  if (category === 'Idea') {
+    categoryStyle += ' note-idea';
+  } else if (category === 'Random Thought') {
+    categoryStyle += ' note-random-thought';
   }
 
   return (
-    <div className={styledNote} onClick={handleNoteClick}>
+    <div className={previewNoteStyle} onClick={handleNoteClick}>
       <div className="flex-container">
-        <div>{configuratedDate}</div>
-        <div className="note-category">Task</div>
+        <div className="note-date">{configuratedDate}</div>
+        <div className={categoryStyle}>{category}</div>
       </div>
       
-      <div className="">{title}</div>
-      <div className="">{slicedNoteText}</div>
-      <small>{configuratedDate}</small>
+      <div className="note-title">{title}</div>
+      <div className="note-content">{slicedContent}</div>
+      <div className="note-dates">{dateMatch}</div>
     </div>
   );
 };
