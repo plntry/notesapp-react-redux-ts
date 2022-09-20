@@ -5,7 +5,6 @@ import Note from "./Note";
 
 const NotesList: React.FC = () => {
   const location = useLocation();
-  // console.log(location.pathname);
   
   let isPageWithActiveNotes = true;
   let notesToShow: Array<any> = [];
@@ -14,7 +13,7 @@ const NotesList: React.FC = () => {
   const { notesArchivedList } = useSelector((state: AppState) => state);
 
   if (location.pathname.slice(0, 15) === '/archived-tasks' ||
-      location.pathname.slice(0, 26) === '/archived-random-thoughts' ||
+      location.pathname.slice(0, 25) === '/archived-random-thoughts' ||
       location.pathname.slice(0, 15) === '/archived-ideas') {
     isPageWithActiveNotes = false;
   }
@@ -23,11 +22,11 @@ const NotesList: React.FC = () => {
     notesToShow = notesActiveList;
   else if (location.pathname.slice(0, 15) === '/archived-tasks')
     notesToShow = notesArchivedList.filter(note => note.category === 'Task');
-  else if (location.pathname.slice(0, 26) === '/archived-random-thoughts')
+  else if (location.pathname.slice(0, 25) === '/archived-random-thoughts')
     notesToShow = notesArchivedList.filter(note => note.category === 'Random Thought');
   else if (location.pathname.slice(0, 15) === '/archived-ideas')
     notesToShow = notesArchivedList.filter(note => note.category === 'Idea');
-
+    
   return (
     <div className='notes-container'>
       {notesToShow

@@ -31,7 +31,7 @@ export const CreateNewNote: React.FC = () => {
         } else {
           dispatch(addNewNote({ title, content, category }));
         }
-        navigate("/");
+        navigate('/');
     }
 
     const handleFormCancel = () => {

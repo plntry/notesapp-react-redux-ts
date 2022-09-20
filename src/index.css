@@ -150,6 +150,21 @@ body {
   z-index: 1;
 }
 
+.open-home-btn .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  height: 20px;
+  opacity: 85%;
+  margin-top: 75px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
 .note-category:hover .tooltiptext {
   visibility: visible;
 }

@@ -35,15 +35,18 @@ const App: React.FC = () => {
           <Route path='/create-note' element={<CreateNewNote />} />
           <Route path='/edit-note/:id' element={<CreateNewNote />} />
           <Route path='/:id' element={<MainPage />} />
+
           <Route path='/archived-tasks' element={<MainPage />} />
           <Route path='/archived-random-thoughts' element={<MainPage />} />
           <Route path='/archived-ideas' element={<MainPage />} />
+
           <Route path='/archived-tasks/edit-note/:id' element={<CreateNewNote />} />
           <Route path='/archived-random-thoughts/edit-note/:id' element={<CreateNewNote />} />
           <Route path='/archived-ideas/edit-note/:id' element={<CreateNewNote />} />
+          
           <Route path='/archived-tasks/:id' element={<MainPage />} />
-          <Route path='/archived-ideas/:id' element={<MainPage />} />
           <Route path='/archived-random-thoughts/:id' element={<MainPage />} />
+          <Route path='/archived-ideas/:id' element={<MainPage />} />
         </Routes>
       </Router>
     </>

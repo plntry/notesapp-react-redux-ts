@@ -23,6 +23,11 @@ export const archiveNote = (note: INote): Action => ({
     payload: note
 })
 
+export const unarchiveNote = (note: INote): Action => ({
+    type: 'UNARCHIVE_NOTE',
+    payload: note
+})
+
 export const setEditStatus = (isEdit: boolean): Action => ({
     type: 'IS_EDIT',
     payload: isEdit

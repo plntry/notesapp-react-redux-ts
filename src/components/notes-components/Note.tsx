@@ -19,7 +19,7 @@ const Note: React.FC<INote> = ({ content, title, category, date, id }) => {
       if (location.pathname.includes('tasks')) {
         navigate(`/archived-tasks/${id}`);
         dispatch(setNotePreviewId(id));
-      } else if (location.pathname.includes('random-thoughts')) {
+      } else if (location.pathname.includes('thoughts')) {
         navigate(`/archived-random-thoughts/${id}`);
         dispatch(setNotePreviewId(id));
       } else if (location.pathname.includes('ideas')) {

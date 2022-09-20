@@ -11,9 +11,12 @@ const NotePreview: React.FC = () => {
   const location = useLocation();
 
   const { notesActiveList, notesArchivedList, notePreviewId } = useSelector((state: AppState) => state);
+  
   let notesToShow = [];
+  let isArchivedPage = false;
 
   if (location.pathname.includes('archived')) {
+    isArchivedPage = true;
     if (location.pathname.includes('tasks'))
       notesToShow = notesArchivedList.filter(note => note.category === 'Task');
     else if (location.pathname.includes('thoughts'))
@@ -30,7 +33,6 @@ const NotePreview: React.FC = () => {
       </div>
     )
   }
-  console.log(notesToShow, 'notes to show');
 
   let notePreview = notesToShow.filter(({ id }) => id === notePreviewId)[0];
 
@@ -65,6 +67,9 @@ const NotePreview: React.FC = () => {
     navigate('/');
   }
 
+  let archiveBtnText = '';
+  isArchivedPage ? archiveBtnText = 'Unarchive' : archiveBtnText = 'Archive';
+
   return (
     <div className="preview-note-item">
       <div className="preview-point">Created: </div><div>{configuratedDate}</div>
@@ -80,7 +85,7 @@ const NotePreview: React.FC = () => {
         Edit
       </Link>
       <button className="archive-note-btn" onClick={() => onNoteArchive()}>
-        Archive
+        {archiveBtnText}
       </button>
       <Link
         to="/"

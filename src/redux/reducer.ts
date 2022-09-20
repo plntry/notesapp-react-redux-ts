@@ -126,6 +126,27 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
                 notesArchivedList: [archivedNote, ...state.notesArchivedList],
             }
 
+            case 'UNARCHIVE_NOTE':
+                const noteToUnarchive = state.notesActiveList.find((n) => n.id === action.payload.id);
+                const unarchivedNote = {
+                    ...noteToUnarchive,
+                    status: 'archived',
+                }
+                
+                const unarchivedNoteIndex = state.notesActiveList.findIndex(
+                    (n) => n.id === action.payload.id
+                )
+                const updatedNotesArchivedList = [
+                    ...state.notesActiveList.slice(0, unarchivedNoteIndex),
+                    ...state.notesActiveList.slice(unarchivedNoteIndex + 1),
+                ]         
+                return {
+                    ...state,
+                    notePreviewId: null,
+                    notesArchivedList: updatedNotesArchivedList,
+                    notesActiveList: [unarchivedNote, ...state.notesActiveList],
+                }
+
         case 'IS_EDIT':
             return {
                 ...state,
