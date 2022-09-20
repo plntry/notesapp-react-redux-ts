@@ -5,7 +5,7 @@ const OpenCreateFormBtn: React.FC = () => {
     <>
       <div className='open-form-btn-container'>
         <Link to='/create-note' className="open-form-btn">
-          Add new note
+          New note
         </Link> 
       </div>
     </>

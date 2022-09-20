@@ -72,17 +72,21 @@ const NotePreview: React.FC = () => {
     navigate(-1);
   }
 
-  let onNoteAction: () => void;
+  let onNoteArchiveUnarchive: () => void;
 
   let archiveBtnText = '';
+  let editBtnStyles = 'edit-note-btn';
+  let deleteBtnStyles = 'delete-note-btn';
+
   if (isArchivedPage) {
     archiveBtnText = 'Unarchive';
-    onNoteAction = () => onNoteUnarchive();
+    editBtnStyles += ' hidden';
+    deleteBtnStyles += ' hidden';
+    onNoteArchiveUnarchive = () => onNoteUnarchive();
   } else {
     archiveBtnText = 'Archive';
-    onNoteAction = () => onNoteArchive();
+    onNoteArchiveUnarchive = () => onNoteArchive();
   }
-  // isArchivedPage ? archiveBtnText = 'Unarchive' : archiveBtnText = 'Archive';
 
   return (
     <div className="preview-note-item">
@@ -93,17 +97,17 @@ const NotePreview: React.FC = () => {
       <div className="preview-point">Dates: </div><div className="">{dateMatch}</div>
       <Link
         to={`/edit-note/${notePreview.id}`}
-        className="edit-note-btn"
+        className={editBtnStyles}
         onClick={() => onNoteEdit()}
       >
         Edit
       </Link>
-      <button className="archive-note-btn" onClick={() => onNoteAction()}>
+      <button className="archive-note-btn" onClick={() => onNoteArchiveUnarchive()}>
         {archiveBtnText}
       </button>
       <Link
         to="/"
-        className="delete-note-btn"
+        className={deleteBtnStyles}
         onClick={() => dispatch(removeNote(notePreview.id))}
       >
         Delete

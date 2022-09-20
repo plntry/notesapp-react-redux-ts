@@ -4,7 +4,7 @@ const HomeBtn: React.FC = () => {
   return (
     <>
       <div className='open-form-btn-container'>
-        <Link to='/' className="open-form-btn open-home-btn">
+        <Link to='/' className="open-home-btn">
           Home
           <span className="tooltiptext">Click to open active tasks list</span>
         </Link>

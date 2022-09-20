@@ -48,13 +48,15 @@ body {
 }
 
 .open-form-btn {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
   border-radius: 9px;
   background-color: rgb(132, 201, 251);
   color: black;
-  padding: 6px 6px;
+  padding: 3px 3px;
   border: 2px solid rgb(49, 99, 180);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -150,12 +152,39 @@ body {
   z-index: 1;
 }
 
+.note-category:hover .tooltiptext {
+  visibility: visible;
+}
+
+.open-home-btn {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 9px;
+  background-color: rgb(177, 223, 255);
+  color: black;
+  padding: 3px 3px;
+  border: 2px solid rgb(49, 99, 180);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  margin-left: 15px;
+}
+
+.open-home-btn:hover {
+  background-color: rgb(37, 107, 157);
+  color: white;
+}
+
 .open-home-btn .tooltiptext {
   visibility: hidden;
   width: auto;
   height: 20px;
   opacity: 85%;
-  margin-top: 75px;
+  margin-top: 36px;
+  margin-left: -55px;
   background-color: black;
   color: #fff;
   text-align: center;
@@ -165,7 +194,7 @@ body {
   z-index: 1;
 }
 
-.note-category:hover .tooltiptext {
+.open-home-btn:hover .tooltiptext {
   visibility: visible;
 }
 
@@ -289,6 +318,10 @@ body {
 
 .create-note-form-elements {
   margin-bottom: 25px;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 680px) {
