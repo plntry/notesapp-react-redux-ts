@@ -127,18 +127,18 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
             }
 
             case 'UNARCHIVE_NOTE':
-                const noteToUnarchive = state.notesActiveList.find((n) => n.id === action.payload.id);
+                const noteToUnarchive = state.notesArchivedList.find((n) => n.id === action.payload.id);
                 const unarchivedNote = {
                     ...noteToUnarchive,
-                    status: 'archived',
+                    status: 'active',
                 }
                 
-                const unarchivedNoteIndex = state.notesActiveList.findIndex(
+                const unarchivedNoteIndex = state.notesArchivedList.findIndex(
                     (n) => n.id === action.payload.id
                 )
                 const updatedNotesArchivedList = [
-                    ...state.notesActiveList.slice(0, unarchivedNoteIndex),
-                    ...state.notesActiveList.slice(unarchivedNoteIndex + 1),
+                    ...state.notesArchivedList.slice(0, unarchivedNoteIndex),
+                    ...state.notesArchivedList.slice(unarchivedNoteIndex + 1),
                 ]         
                 return {
                     ...state,

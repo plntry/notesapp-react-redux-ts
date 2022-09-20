@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setNewNoteTitle, setNewNoteContent, setNewNoteCategory } from "../../redux/actions/noteFieldsActions";
-import { archiveNote, removeNote, setEditStatus } from "../../redux/actions/noteListActions";
+import { archiveNote, unarchiveNote, removeNote, setEditStatus } from "../../redux/actions/noteListActions";
 import { regexp } from "../../constants/constants";
 
 const NotePreview: React.FC = () => {
@@ -64,11 +64,25 @@ const NotePreview: React.FC = () => {
 
   const onNoteArchive = () => {
     dispatch(archiveNote(notePreview));
-    navigate('/');
+    navigate(-1);
   }
 
+  const onNoteUnarchive = () => {
+    dispatch(unarchiveNote(notePreview));
+    navigate(-1);
+  }
+
+  let onNoteAction: () => void;
+
   let archiveBtnText = '';
-  isArchivedPage ? archiveBtnText = 'Unarchive' : archiveBtnText = 'Archive';
+  if (isArchivedPage) {
+    archiveBtnText = 'Unarchive';
+    onNoteAction = () => onNoteUnarchive();
+  } else {
+    archiveBtnText = 'Archive';
+    onNoteAction = () => onNoteArchive();
+  }
+  // isArchivedPage ? archiveBtnText = 'Unarchive' : archiveBtnText = 'Archive';
 
   return (
     <div className="preview-note-item">
@@ -84,7 +98,7 @@ const NotePreview: React.FC = () => {
       >
         Edit
       </Link>
-      <button className="archive-note-btn" onClick={() => onNoteArchive()}>
+      <button className="archive-note-btn" onClick={() => onNoteAction()}>
         {archiveBtnText}
       </button>
       <Link
