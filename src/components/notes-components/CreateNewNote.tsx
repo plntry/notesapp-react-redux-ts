@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { updateNote, addNewNote, setEditStatus } from '../../redux/actions/noteListActions';
 import { setNewNoteContent, setNewNoteTitle, setNewNoteCategory } from '../../redux/actions/noteFieldsActions';
@@ -9,7 +8,7 @@ export const CreateNewNote: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const notesList = useSelector((state: AppState) => state.notesList);
+    const notesList = useSelector((state: AppState) => state.notesActiveList);
 
     const { title, content, category } = useSelector((state: AppState) => state.noteFields)
 

@@ -18,6 +18,11 @@ export const updateNote = (note: INote): Action => ({
     payload: note
 })
 
+export const archiveNote = (note: INote): Action => ({
+    type: 'ARCHIVE_NOTE',
+    payload: note
+})
+
 export const setEditStatus = (isEdit: boolean): Action => ({
     type: 'IS_EDIT',
     payload: isEdit

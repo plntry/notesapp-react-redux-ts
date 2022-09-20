@@ -10,29 +10,40 @@ import { notes } from './data/notes';
 const App: React.FC = () => {
   const dispatch = useDispatch();
 
-  const notesList = useSelector((state: AppState) => state.notesList);
+  const notesActiveList = useSelector((state: AppState) => state.notesActiveList);
+  const notesArchivedList = useSelector((state: AppState) => state.notesArchivedList);
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
+    localStorage.setItem('notesActiveList', JSON.stringify(notes));
   }, [])
 
   useEffect(() => {
-    const notes = JSON.parse(localStorage.getItem('notes') || '[]');
-    dispatch(fetchNotes(notes));
+    const activeNotes = JSON.parse(localStorage.getItem('notesActiveList') || '[]');
+    dispatch(fetchNotes(activeNotes));
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notesList));
-  }, [notesList]);
+    localStorage.setItem('notesActiveList', JSON.stringify(notesActiveList));
+    localStorage.setItem('notesArchivedList', JSON.stringify(notesArchivedList));
+  }, [notesActiveList, notesArchivedList]);
 
   return (
     <>
       <Router>
         <Routes>
-          <Route  path='/' element={<MainPage />} />
-          <Route  path='/create-note' element={<CreateNewNote />} />
-          <Route  path='/edit-note/:id' element={<CreateNewNote />} />
-          <Route  path='/:id' element={<MainPage />} />
+          <Route path='/' element={<MainPage />} />
+          <Route path='/create-note' element={<CreateNewNote />} />
+          <Route path='/edit-note/:id' element={<CreateNewNote />} />
+          <Route path='/:id' element={<MainPage />} />
+          <Route path='/archived-tasks' element={<MainPage />} />
+          <Route path='/archived-random-thoughts' element={<MainPage />} />
+          <Route path='/archived-ideas' element={<MainPage />} />
+          <Route path='/archived-tasks/edit-note/:id' element={<CreateNewNote />} />
+          <Route path='/archived-random-thoughts/edit-note/:id' element={<CreateNewNote />} />
+          <Route path='/archived-ideas/edit-note/:id' element={<CreateNewNote />} />
+          <Route path='/archived-tasks/:id' element={<MainPage />} />
+          <Route path='/archived-ideas/:id' element={<MainPage />} />
+          <Route path='/archived-random-thoughts/:id' element={<MainPage />} />
         </Routes>
       </Router>
     </>

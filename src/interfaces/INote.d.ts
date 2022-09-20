@@ -4,4 +4,5 @@ interface INote {
     date: Date;
     content: string;
     category: string;
+    status: string;
   }

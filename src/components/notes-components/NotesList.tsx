@@ -1,18 +1,36 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Note from "./Note";
 
 const NotesList: React.FC = () => {
-  const { notesList, searchText } = useSelector((state: AppState) => state);
+  const location = useLocation();
+  // console.log(location.pathname);
+  
+  let isPageWithActiveNotes = true;
+  let notesToShow: Array<any> = [];
+
+  const { notesActiveList } = useSelector((state: AppState) => state);
+  const { notesArchivedList } = useSelector((state: AppState) => state);
+
+  if (location.pathname.slice(0, 15) === '/archived-tasks' ||
+      location.pathname.slice(0, 26) === '/archived-random-thoughts' ||
+      location.pathname.slice(0, 15) === '/archived-ideas') {
+    isPageWithActiveNotes = false;
+  }
+
+  if (isPageWithActiveNotes)
+    notesToShow = notesActiveList;
+  else if (location.pathname.slice(0, 15) === '/archived-tasks')
+    notesToShow = notesArchivedList.filter(note => note.category === 'Task');
+  else if (location.pathname.slice(0, 26) === '/archived-random-thoughts')
+    notesToShow = notesArchivedList.filter(note => note.category === 'Random Thought');
+  else if (location.pathname.slice(0, 15) === '/archived-ideas')
+    notesToShow = notesArchivedList.filter(note => note.category === 'Idea');
 
   return (
     <div className='notes-container'>
-      {notesList
-        .filter((note) =>
-          searchText
-            ? note.title.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-            : note
-        )
+      {notesToShow
         .map((note) => (
           <Note
             key={note.id}
@@ -21,6 +39,7 @@ const NotesList: React.FC = () => {
             content={note.content}
             title={note.title}
             category={note.category}
+            status={note.status}
           />
         ))}
     </div>

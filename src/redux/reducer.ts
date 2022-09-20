@@ -1,12 +1,12 @@
 const initialState: AppState = {
-    notesList: [],
+    notesActiveList: [],
+    notesArchivedList: [],
     noteFields: {
         title: '',
         content: '',
         category: '',
     },
     notePreviewId: null,
-     searchText: '',
      isEdit: false
 }
 
@@ -51,12 +51,13 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
                     content,
                     category,
                     id: Date.now(),
-                    date: new Date()
+                    date: new Date(),
+                    status: 'active'
                 }
                 
                 return {
                     ...state,
-                    notesList: [newNote, ...state.notesList],
+                    notesActiveList: [newNote, ...state.notesActiveList],
                     noteFields: resetNoteFields()
                 }
             }
@@ -70,38 +71,59 @@ export const reducer = (state:AppState = initialState, action:Action): AppState 
         case 'FETCH_NOTES':
             return {
                 ...state,
-                notesList: action.payload,
+                notesActiveList: action.payload,
             }
 
         case 'REMOVE_NOTE':
             return {
                 ...state,
                 notePreviewId: null,
-                notesList: state.notesList.filter(({ id }) => id !== action.payload),
+                notesActiveList: state.notesActiveList.filter(({ id }) => id !== action.payload),
             }
 
         case 'UPDATE_NOTE':
-            const note = state.notesList.find((n) => n.id === action.payload.id);
+            const note = state.notesActiveList.find((n) => n.id === action.payload.id);
             const updatedNote = {
                 ...note,
                 title: action.payload.title,
                 content: action.payload.content,
                 category: action.payload.category,
                 date: new Date(),
-            };
-            const noteIndex = state.notesList.findIndex(
+            }
+            const noteIndex = state.notesActiveList.findIndex(
                 (n) => n.id === action.payload.id
-            );
+            )
             const updatedNotesList = [
-                ...state.notesList.slice(0, noteIndex),
+                ...state.notesActiveList.slice(0, noteIndex),
                 updatedNote,
-                ...state.notesList.slice(noteIndex + 1),
-            ];
+                ...state.notesActiveList.slice(noteIndex + 1),
+            ]
             return {
                 ...state,
-                notesList: updatedNotesList,
+                notesActiveList: updatedNotesList,
                 noteFields: resetNoteFields(),
                 isEdit: false,
+            }
+        
+        case 'ARCHIVE_NOTE':
+            const noteToArchive = state.notesActiveList.find((n) => n.id === action.payload.id);
+            const archivedNote = {
+                ...noteToArchive,
+                status: 'archived',
+            }
+            
+            const archivedNoteIndex = state.notesActiveList.findIndex(
+                (n) => n.id === action.payload.id
+            )
+            const updatedNotesActiveList = [
+                ...state.notesActiveList.slice(0, archivedNoteIndex),
+                ...state.notesActiveList.slice(archivedNoteIndex + 1),
+            ]         
+            return {
+                ...state,
+                notePreviewId: null,
+                notesActiveList: updatedNotesActiveList,
+                notesArchivedList: [archivedNote, ...state.notesArchivedList],
             }
 
         case 'IS_EDIT':

@@ -1,12 +1,11 @@
 import NotePreview from "../notes-components/NotePreview";
 import NotesList from "../notes-components/NotesList";
-import OpenCreateFormBtn from "../OpenCreateFormBtn";
-
+import Header from "../header-components/Header";
 
 const MainPage: React.FC = () => {
   return (
     <>
-        <OpenCreateFormBtn />
+        <Header />
         <div className="main-page-container">
           <NotesList />
           <NotePreview />

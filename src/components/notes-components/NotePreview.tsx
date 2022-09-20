@@ -1,22 +1,38 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setNewNoteTitle, setNewNoteContent, setNewNoteCategory } from "../../redux/actions/noteFieldsActions";
-import { removeNote, setEditStatus } from "../../redux/actions/noteListActions";
+import { archiveNote, removeNote, setEditStatus } from "../../redux/actions/noteListActions";
 import { regexp } from "../../constants/constants";
 
 const NotePreview: React.FC = () => {
   const dispatch = useDispatch();
-  const { notesList, notePreviewId } = useSelector((state: AppState) => state);
-  const notePreview = notesList.filter(({ id }) => id === notePreviewId)[0];
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  if (notesList.length === 0) {
+  const { notesActiveList, notesArchivedList, notePreviewId } = useSelector((state: AppState) => state);
+  let notesToShow = [];
+
+  if (location.pathname.includes('archived')) {
+    if (location.pathname.includes('tasks'))
+      notesToShow = notesArchivedList.filter(note => note.category === 'Task');
+    else if (location.pathname.includes('thoughts'))
+      notesToShow = notesArchivedList.filter(note => note.category === 'Random Thought');
+    else if (location.pathname.includes('ideas'))
+      notesToShow = notesArchivedList.filter(note => note.category === 'Idea');
+  } else
+    notesToShow = notesActiveList;
+
+  if (notesToShow.length === 0) {
     return (
       <div className="open-form-btn-container">
         <p className="notes-message no-notes-message">You have no notes here yet :(</p>
       </div>
     )
   }
+  console.log(notesToShow, 'notes to show');
+
+  let notePreview = notesToShow.filter(({ id }) => id === notePreviewId)[0];
 
   if (!notePreview) {
     return (
@@ -44,6 +60,11 @@ const NotePreview: React.FC = () => {
     dispatch(setNewNoteCategory(category));
   }
 
+  const onNoteArchive = () => {
+    dispatch(archiveNote(notePreview));
+    navigate('/');
+  }
+
   return (
     <div className="preview-note-item">
       <div className="preview-point">Created: </div><div>{configuratedDate}</div>
@@ -58,6 +79,9 @@ const NotePreview: React.FC = () => {
       >
         Edit
       </Link>
+      <button className="archive-note-btn" onClick={() => onNoteArchive()}>
+        Archive
+      </button>
       <Link
         to="/"
         className="delete-note-btn"

@@ -1,12 +1,12 @@
 type AppState = {
-  notesList: Array<any>;
+  notesActiveList: Array<any>;
+  notesArchivedList: Array<any>;
   noteFields: {
     title: string;
     content: string;
     category: string;
   };
   notePreviewId: null | number;
-  searchText: string;
   isEdit: boolean;
 }
 
@@ -21,4 +21,5 @@ type Note = {
   date: Date;
   content: string;
   category: string;
+  status: string;
 }
