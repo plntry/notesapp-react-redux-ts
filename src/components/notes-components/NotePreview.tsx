@@ -28,9 +28,7 @@ const NotePreview: React.FC = () => {
 
   if (notesToShow.length === 0) {
     return (
-      <div className="open-form-btn-container">
-        <p className="notes-message no-notes-message">You have no notes here yet :(</p>
-      </div>
+      <p className="notes-message">You have no notes here yet :(</p>
     )
   }
 
@@ -38,9 +36,7 @@ const NotePreview: React.FC = () => {
 
   if (!notePreview) {
     return (
-      <div className="open-form-btn-container">
-        <p className="notes-message">Click on the note to preview info</p>
-      </div>
+      <p className="notes-message">Click on the note to preview info</p>
     )
   }
 
