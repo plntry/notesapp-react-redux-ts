@@ -1,7 +1,6 @@
 {
   "name": "noteapp",
   "version": "0.1.0",
-  "homepage": "https://plntry.github.io/notesapp-react-redux-ts",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -22,8 +21,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,6 +45,9 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "autoprefixer": "^10.4.12",
+    "gh-pages": "^4.0.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }
