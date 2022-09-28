@@ -76,8 +76,8 @@ const NotePreview: React.FC = () => {
 
   if (isArchivedPage) {
     archiveBtnText = 'Unarchive';
-    editBtnStyles += ' hidden';
-    deleteBtnStyles += ' hidden';
+    editBtnStyles += ' hidden-element';
+    deleteBtnStyles += ' hidden-element';
     onNoteArchiveUnarchive = () => onNoteUnarchive();
   } else {
     archiveBtnText = 'Archive';

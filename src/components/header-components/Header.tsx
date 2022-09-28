@@ -5,7 +5,7 @@ import OpenCreateFormBtn from './OpenCreateFormBtn';
 const Header: React.FC = () => {
   return (
     <>
-      <header className='flex-container'>
+      <header>
         <HomeBtn />
         <Categories />
         <OpenCreateFormBtn />
