@@ -1,15 +1,26 @@
+import React from 'react';
+import '../../index.css';
 import { Link } from 'react-router-dom';
 
-const HomeBtn: React.FC = () => {
+interface ButtonProps {
+  size?: 'small' | 'medium' | 'large';
+  onClick?: () => void;
+}
+
+export const HomeBtn = ({
+  size = 'medium',
+  ...props
+}: ButtonProps) => {
   return (
-    <>
+    <>  
       <div className='header-btn-container'>
-        <Link to='/' className="header-btn">
+        <Link
+          to='/'
+          className={`header-btn header-btn-${size}`}
+          {...props}>
           Home
         </Link>
       </div>
     </>
-  )
-}
-
-export default HomeBtn;
+  );
+};

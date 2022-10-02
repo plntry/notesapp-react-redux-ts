@@ -1,7 +1,9 @@
+import React from 'react';
+import '../../index.css';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Categories: React.FC = () => {
+export const Categories: React.FC = () => {
 
   const notesActiveList = useSelector((state: AppState) => state.notesActiveList);
   const notesArchivedList = useSelector((state: AppState) => state.notesArchivedList);
@@ -42,5 +44,3 @@ const Categories: React.FC = () => {
     </>
   )
 }
-
-export default Categories;

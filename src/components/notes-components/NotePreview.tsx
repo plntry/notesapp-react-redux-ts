@@ -91,23 +91,25 @@ const NotePreview: React.FC = () => {
       <div className="preview-point">Content: </div><div className="">{content}</div>
       <div className="preview-point">Category: </div><div className="">{category}</div>
       <div className="preview-point">Dates: </div><div className="">{dateMatch}</div>
-      <Link
-        to={`/edit-note/${notePreview.id}`}
-        className={editBtnStyles}
-        onClick={() => onNoteEdit()}
-      >
-        Edit
-      </Link>
-      <button className="archive-note-btn" onClick={() => onNoteArchiveUnarchive()}>
-        {archiveBtnText}
-      </button>
-      <Link
-        to="/"
-        className={deleteBtnStyles}
-        onClick={() => dispatch(removeNote(notePreview.id))}
-      >
-        Delete
-      </Link>
+      <div className="preview-btn-container">
+        <Link
+          to={`/edit-note/${notePreview.id}`}
+          className={editBtnStyles}
+          onClick={() => onNoteEdit()}
+        >
+          Edit
+        </Link>
+        <button className="archive-note-btn" onClick={() => onNoteArchiveUnarchive()}>
+          {archiveBtnText}
+        </button>
+        <Link
+          to="/"
+          className={deleteBtnStyles}
+          onClick={() => dispatch(removeNote(notePreview.id))}
+        >
+          Delete
+        </Link>
+      </div>
     </div>
   );
 };

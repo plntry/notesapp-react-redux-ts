@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 @layer components {
+  html {
+    @apply
+      bg-gradient-to-br from-indigo-400 to-violet-100
+      bg-no-repeat
+      bg-center
+      bg-fixed
+      
+  }
   body {
     @apply 
-    bg-gray-200
       flex
       flex-col
       items-center
@@ -45,6 +52,8 @@
       top-0
       z-50
       bg-indigo-300
+      bg-opacity-50
+      backdrop-blur-sm
       shadow-md
       w-screen
       max-w-full
@@ -102,6 +111,20 @@
       focus:ring-opacity-50
       focus:ring-offset-1;
   }
+
+  .header-btn-small {
+    @apply
+      text-xs
+      px-2
+      py-1
+  }
+
+  .header-btn-large {
+    @apply
+      text-3xl
+      px-4
+      py-3
+  }
   
   .notes-message {
     margin-left: 58vw;
@@ -143,10 +166,10 @@
     hover:bg-indigo-300
       hover:cursor-pointer
       transition
-      focus:ring
-      focus:ring-indigo-500
-      focus:ring-opacity-50
-      focus:ring-offset-1;
+      hover:ring
+    hover:ring-indigo-500
+      hover:ring-opacity-50
+      hover:ring-offset-1;
   }
   
   .note-category {
@@ -215,8 +238,10 @@
   .note-active {
     @apply
       border-2
-    border-indigo-900
-    bg-indigo-300;
+    bg-indigo-300
+      ring
+    ring-indigo-500
+      ring-opacity-50;
   }
   
   .preview-note-item {
@@ -230,7 +255,7 @@
       mt-4
       mr-5
       rounded-xl
-    bg-indigo-300
+    bg-indigo-400
       shadow-xl;
   }
   
@@ -240,20 +265,34 @@
       text-lg;
   }
   
+  .preview-btn-container {
+    @apply
+      flex
+      justify-center
+      gap-3
+      flex-wrap
+      py-2
+  }
+
   .delete-note-btn {
+    padding: 0 25px 0 25px;
     @apply 
+      uppercase
       no-underline
       text-lg
-      font-bold
       text-center
       rounded-xl
       shadow-lg
-      bg-red-700
-      text-white
-      w-11/12
-      self-center
+      text-red-900
+      font-bold
+      py-1
       mt-1
-      hover:bg-red-900
+      bg-indigo-100
+      hover:bg-gradient-to-br from-red-600  to-red-900
+      hover:text-indigo-50
+      hover:bg-opacity-70
+      hover:-translate-y-0.5
+      transform
       transition
       focus:ring
       focus:ring-red-500
@@ -262,40 +301,50 @@
   }
   
   .edit-note-btn {
+    padding: 0 34px 0 34px;
     @apply 
+      uppercase
       no-underline
       text-lg
-      font-bold
       text-center
       rounded-xl
       shadow-lg
-      bg-blue-600
-      text-white
-      w-11/12
-      self-center
+      text-blue-800
+      font-bold
+      py-1
       mt-1
-      hover:bg-blue-800
+      bg-indigo-100
+      hover:bg-gradient-to-br from-indigo-600 to-blue-900
+      hover:text-indigo-50
+      hover:bg-opacity-70
+      hover:-translate-y-0.5
+      transform
       transition
       focus:ring
-      focus:ring-blue-500
+      focus:ring-blue-600
       focus:ring-opacity-50
       focus:ring-offset-1;
   }
   
   .archive-note-btn {
+    padding: 0 20px 0 20px;
     @apply 
+      uppercase
       no-underline
       text-lg
-      font-bold
       text-center
       rounded-xl
       shadow-lg
-      bg-amber-800
-      text-white
-      w-11/12
-      self-center
+      text-amber-900
+      font-bold
+      py-1
       mt-1
-      hover:bg-amber-900
+      bg-indigo-100
+      hover:bg-gradient-to-br from-yellow-700  to-yellow-900
+      hover:text-indigo-50
+      hover:bg-opacity-70
+      hover:-translate-y-0.5
+      transform
       transition
       focus:ring
       focus:ring-amber-500
