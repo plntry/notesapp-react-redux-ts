@@ -91,6 +91,7 @@ const NotePreview: React.FC = () => {
       <div className="preview-point">Content: </div><div className="">{content}</div>
       <div className="preview-point">Category: </div><div className="">{category}</div>
       <div className="preview-point">Dates: </div><div className="">{dateMatch}</div>
+      <div className="preview-btn-container">
       <Link
         to={`/edit-note/${notePreview.id}`}
         className={editBtnStyles}
@@ -108,6 +109,7 @@ const NotePreview: React.FC = () => {
       >
         Delete
       </Link>
+      </div>
     </div>
   );
 };
